@@ -1,0 +1,10 @@
+usuario: hamintonjair@gmail.com
+clave: 12345
+
+echo "# htdocs" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/hamintonjair/htdocs.git
+git push -u origin main
