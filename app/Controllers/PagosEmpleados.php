@@ -91,21 +91,7 @@ class PagosEmpleados extends BaseController
             // Verificar si hay servicios pendientes para hoy
             $serviciosPendientes = isset($serviciosArray[$empleadoId]) ? $serviciosArray[$empleadoId] : 0;
 
-            // // Determinar el estado de pago
-            // if ($serviciosPendientes > 0) {
-            //     $empleado['estado_pago'] = 'No Pagado';
-            //     // $empleado['boton_ver_servicios'] = true;
-            // } else {
-            //     if ($totalPagado > 0 && $ultimaFechaPago) {
-            //         $empleado['estado_pago'] = 'Pagado';
-            //         // $empleado['boton_ver_servicios'] = false;
-            //     } else {
-            //         $empleado['estado_pago'] = 'No Pagado';
-            //         // $empleado['boton_ver_servicios'] = true;
-            //     }
-            // }
-
-            // Agregar información de pagos
+                   // Agregar información de pagos
             $empleado['total_pagado'] = $totalPagado;
             $empleado['ultima_fecha_pago'] = $ultimaFechaPago ? date('Y-m-d', strtotime($ultimaFechaPago)) : 'No disponible';
             $empleado['boton_ver_pagos'] = $totalPagado > 0;
@@ -122,7 +108,7 @@ class PagosEmpleados extends BaseController
 
         // Obtener servicios de la agenda para el trabajador en una fecha específica
         $serviciosAgendas = $this->turno
-            ->select('agenda.id ,agenda.servicio AS nombre_servicio, 
+            ->select('agenda.id, agenda.servicio AS nombre_servicio, 
           CAST(agenda.precio AS DECIMAL(10,2)) AS precio_servicio, 
           CAST(agenda.pago_empleado AS DECIMAL(10,2)) AS pago_empleado, 
           agenda.date AS fecha_servicio,
@@ -134,6 +120,7 @@ class PagosEmpleados extends BaseController
             ->where('agenda.trabajador_id', $empleadoId)
             ->where('agenda.date', $fechaHoy)
             ->findAll();
+
 
         // Obtener servicios adicionales para el turno
         $serviciosAdicionales = $this->turnoServicioModel
@@ -180,99 +167,27 @@ class PagosEmpleados extends BaseController
                 $totalPagar += $servicio['pago_empleado'];
             }
         }
-
         // Ordenar o ajustar la lista final si es necesario
         usort($serviciosFinales, function ($a, $b) {
             return strcmp($a['fecha_servicio'], $b['fecha_servicio']);
         });
 
+        if(!empty($serviciosFinales[0]['id'])){
+            $turno_id =$serviciosFinales[0]['id'];
+        }else
+        {
+            $turno_id = null;
+        }
         // Devolver la respuesta en formato JSON
         return $this->response->setJSON([
             'servicios' => $serviciosFinales,
-            'total_pagar' => number_format($totalPagar, 2)
+            'total_pagar' => number_format($totalPagar, 2),
+            'turno_id' => $turno_id,
         ]);
 
         return $this->response->setJSON(['servicios' => $serviciosFinales]);
     }
-    // public function getServiciosRealizadoss($empleadoId)
-    // {
-    //     $fechaHoy = date('Y-m-d');
-
-    //     // Obtener servicios de la agenda para el trabajador en una fecha específica
-    //     $serviciosAgendas = $this->turno
-    //     ->select('agenda.servicio AS nombre_servicio, 
-    //         CAST(agenda.precio AS DECIMAL(10,2)) AS precio_servicio, 
-    //         CAST(agenda.pago_empleado AS DECIMAL(10,2)) AS pago_empleado, 
-    //         agenda.date AS fecha_servicio,
-    //         CASE 
-    //             WHEN pagos_empleados.estado IS NOT NULL THEN pagos_empleados.estado
-    //             ELSE \'No Pagado\'
-    //         END AS estado_pago')
-    //     ->join('pagos_empleados', 'agenda.id = pagos_empleados.turno_id AND pagos_empleados.empleado_id = agenda.trabajador_id AND pagos_empleados.fecha_pago = \'' . $fechaHoy . '\'', 'left')
-    //     ->where('agenda.trabajador_id', $empleadoId)
-    //     ->where('agenda.date', $fechaHoy)
-    //     ->findAll();
-
-
-    //     // Obtener servicios adicionales para el turno
-    //     $serviciosAdicionales = $this->turnoServicioModel
-    //     ->select('turno_servicios.nombre_servicio AS nombre_servicio, 
-    //         CAST(turno_servicios.precio_servicio AS DECIMAL(10,2)) AS precio_servicio, 
-    //         CAST(turno_servicios.pago_empleado AS DECIMAL(10,2)) AS pago_empleado, 
-    //         agenda.date AS fecha_servicio,
-    //         CASE 
-    //             WHEN pagos_empleados.estado IS NOT NULL THEN pagos_empleados.estado
-    //             ELSE \'No Pagado\'
-    //         END AS estado_pago')
-    //     ->join('agenda', 'agenda.id = turno_servicios.turno_id', 'inner')
-    //     ->join('pagos_empleados', 'turno_servicios.turno_id = pagos_empleados.turno_id AND pagos_empleados.empleado_id = agenda.trabajador_id AND pagos_empleados.fecha_pago = \'' . $fechaHoy . '\'', 'left')
-    //     ->where('agenda.trabajador_id', $empleadoId)
-    //     ->where('agenda.date', $fechaHoy)
-    //     ->findAll();
-
-
-    //     // Combinando y ajustando los resultados
-    //     $serviciosFinales = [];
-    //     $totalPagar = 0;
-
-    //     // Agregar servicios de la agenda
-    //     foreach ($serviciosAgendas as $servicio) {
-    //         if ($servicio['estado_pago'] !== 'pagado') {
-    //             $serviciosFinales[] = $servicio;
-    //             $totalPagar += $servicio['pago_empleado'];
-    //         }
-    //     }
-
-    //     // Agregar servicios adicionales si no están en el resultado anterior
-    //     foreach ($serviciosAdicionales as $servicio) {
-    //         $encontrado = false;
-    //         foreach ($serviciosFinales as $finalServicio) {
-    //             if (
-    //                 $finalServicio['nombre_servicio'] === $servicio['nombre_servicio'] &&
-    //                 $finalServicio['fecha_servicio'] === $servicio['fecha_servicio']
-    //             ) {
-    //                 $encontrado = true;
-    //                 break;
-    //             }
-    //         }
-    //         if (!$encontrado && $servicio['estado_pago'] !== 'pagado') {
-    //             $serviciosFinales[] = $servicio;
-    //             $totalPagar += $servicio['pago_empleado'];
-    //         }
-    //     }
-
-    //     // Ordenar o ajustar la lista final si es necesario
-    //     usort($serviciosFinales, function ($a, $b) {
-    //         return strcmp($a['fecha_servicio'], $b['fecha_servicio']);
-    //     });
-
-    //     // Devolver la respuesta en formato JSON
-    //     return $this->response->setJSON([
-    //         'servicios' => $serviciosFinales,
-    //         'total_pagar' => number_format($totalPagar, 2)
-    //     ]);
-    // }
-
+    
     // pago a empleados
     public function pagarEmpleado()
     {
