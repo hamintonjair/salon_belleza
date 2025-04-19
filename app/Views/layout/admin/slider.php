@@ -111,5 +111,17 @@
             <span class="menu-title">Facturas </span>
           </a>
         </li>
+
+        <!-- Sección Manual (Ayuda) -->
+        <li class="nav-item sidebar-category">
+          <p>Ayuda</p>
+          <span></span>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?php echo base_url('manual'); ?>">
+            <i class="mdi mdi-file-document-box-outline menu-icon"></i>
+            <span class="menu-title">Manual</span>
+          </a>
+        </li>
       </ul>
     </nav>

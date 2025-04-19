@@ -129,3 +129,6 @@ $routes->post('finanzas/retirar', 'FinanzasController::postEgreso');
 
 $routes->get('report', 'ReportesController::reporte');
 $routes->get('reportes/ganancias', 'ReportesController::ganancias');
+
+// Manual
+$routes->get('manual', 'ManualController::index');
