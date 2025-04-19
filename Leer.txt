@@ -1,0 +1,6 @@
+usuario: hamintonjair@gmail.com
+clave: 12345
+
+instalar composer
+instalar php 8.1
+habilitar extenxion de php - intl
