@@ -42,7 +42,7 @@
                     </div>
                     <div class="modal-body">
                         <form method="post" id="frmUsuario" autocomplete="off">
-                            <input type='hidden' id='idUsuario' name='idUsuario' value=''>
+                            <input type='hidden' id='idusuario' name='idusuario' value=''>
 
                             <div class="row">
                                 <div class="col-md-6 mb-6">

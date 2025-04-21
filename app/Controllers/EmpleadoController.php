@@ -17,7 +17,7 @@ class EmpleadoController extends BaseController
     {
 
         $session = session();
-        $userId = $session->get('idUsuario'); // Obtener el ID del empleado desde la sesión
+        $userId = $session->get('idusuario'); // Obtener el ID del empleado desde la sesión
 
         // Obtener permisos del empleado
         $permissions = $this->permisos->where('id_usuarios', $userId)->findAll();

@@ -32,7 +32,7 @@ class Home extends BaseController
             } else {
                 if (isset($picture)) {
                     $dato = [
-                        'idUsuario' => $data['id'],
+                        'idusuario' => $data['id'],
                         'rol' => $data['rol']
                     ];
                     $session->set($dato);

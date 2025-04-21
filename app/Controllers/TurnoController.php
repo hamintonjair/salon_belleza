@@ -39,7 +39,7 @@ class TurnoController extends BaseController
     public function turnos()
     {
         $session = session();
-        $userId = $session->get('idUsuario'); // Obtener el ID del usuario desde la sesión
+        $userId = $session->get('idusuario'); // Obtener el ID del usuario desde la sesión
         // Obtener permisos del usuario
         $permissions = $this->permisos->where('id_usuarios', $userId)->findAll();
         $data['permissions'] = array_column($permissions, 'id_permisos');
@@ -65,7 +65,7 @@ class TurnoController extends BaseController
             ->where('date', $fecha_actual)
             ->findAll();
 
-        $userIds = array_unique(array_column($turnos, 'idUsuario'));
+        $userIds = array_unique(array_column($turnos, 'idusuario'));
 
         // Obtener roles de los usuarios
         if (!empty($userIds)) {
@@ -81,7 +81,7 @@ class TurnoController extends BaseController
 
         // Añadir el rol a los turnos
         foreach ($turnos as &$turno) {
-            $turno['rol'] = isset($roles[$turno['idUsuario']]) ? $roles[$turno['idUsuario']] : 'Desconocido';
+            $turno['rol'] = isset($roles[$turno['idusuario']]) ? $roles[$turno['idusuario']] : 'Desconocido';
         }
 
         foreach ($turnos as &$turno) {
@@ -220,7 +220,7 @@ class TurnoController extends BaseController
     {
         $data = $this->request->getPost();
         $session = session();
-        $userId = $session->get('idUsuario');
+        $userId = $session->get('idusuario');
         // Obtener los datos del turno, servicio y producto
         $turnoId = $data['turno_id'];
         $servicioId = $data['servicio_id'] ?? null;
@@ -253,7 +253,7 @@ class TurnoController extends BaseController
                     'pago_empleado' => $servicio['pago_empleado'],
                     'trabajador_id' => $turno['trabajador_id'],
                     'fecha_servicio' => $fechaHoy,
-                    'idUsuario' => $userId,
+                    'idusuario' => $userId,
                     'estado_pago' => 'pendiente'
                 ]);
             } else {
@@ -274,7 +274,7 @@ class TurnoController extends BaseController
                     'cantidad' => $cantidad,
                     'precio_unitario' => $producto['v_venta'],
                     'subtotal' => $subtotal,
-                    'idUsuario' => $userId
+                    'idusuario' => $userId
                 ]);
                 // deisminuimos la cantidad del producto
                 $this->producto->decrement('cantidad', $cantidad, ['nombre' => $producto['nombre']]);
@@ -324,9 +324,9 @@ class TurnoController extends BaseController
         $dataTurnoServicio = [
             'trabajador_id' => $trabajadorId
         ];
-        $idUsuario = $this->turno->where('id', $turnoId)->findAll();
+        $idusuario = $this->turno->where('id', $turnoId)->findAll();
 
-        if ($idUsuario[0]['idUsuario'] == $session->get('idUsuario') ) {
+        if ($idusuario[0]['idusuario'] == $session->get('idusuario') ) {
             // Verificar si la transacción fue exitosa
             if ($this->turno->update($turnoId, $dataTurnos) && $this->turnoServicio->where('turno_id', $turnoId)->set($dataTurnoServicio)->update()) {
                 return $this->response->setJSON(['success' => true, 'message' => 'Trabajador asignado correctamente.']);
@@ -441,7 +441,7 @@ class TurnoController extends BaseController
     public function turnosFinalizados()
     {
         $session = session();
-        $userId = $session->get('idUsuario'); // Obtener el ID del usuario desde la sesión
+        $userId = $session->get('idusuario'); // Obtener el ID del usuario desde la sesión
         $this->removeExpiredTurnos();
         // Obtener permisos del usuario
         $permissions = $this->permisos->where('id_usuarios', $userId)->findAll();
@@ -463,7 +463,7 @@ class TurnoController extends BaseController
         $turnos = $this->turno->whereIn('estado', ['Finalizado', 'Anulado'])->findAll();
 
 
-        $userIds = array_unique(array_column($turnos, 'idUsuario'));
+        $userIds = array_unique(array_column($turnos, 'idusuario'));
 
         // Obtener roles de los usuarios
 
@@ -480,7 +480,7 @@ class TurnoController extends BaseController
 
         // Añadir el rol a los turnos
         foreach ($turnos as &$turno) {
-            $turno['usuario'] = isset($roles[$turno['idUsuario']]) ? $roles[$turno['idUsuario']] : 'Desconocido';
+            $turno['usuario'] = isset($roles[$turno['idusuario']]) ? $roles[$turno['idusuario']] : 'Desconocido';
         }
 
         foreach ($turnos as &$turno) {

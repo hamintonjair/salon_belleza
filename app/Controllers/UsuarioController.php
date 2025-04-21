@@ -17,7 +17,7 @@ class UsuarioController extends BaseController
     {
 
         $session = session();
-        $userId = $session->get('idUsuario'); // Obtener el ID del usuario desde la sesión
+        $userId = $session->get('idusuario'); // Obtener el ID del usuario desde la sesión
 
         // Obtener permisos del usuario
         $permissions = $this->permisos->where('id_usuarios', $userId)->findAll();
@@ -61,7 +61,7 @@ class UsuarioController extends BaseController
     public function guardar()
     {
         // Recibir datos del formulario
-        $id = $this->request->getPost('idUsuario');
+        $id = $this->request->getPost('idusuario');
         $nombre = $this->request->getPost('nombre');
         $apellidos = $this->request->getPost('apellidos');
         $cedula = $this->request->getPost('cedula');

@@ -26,7 +26,7 @@ class CalendarioController extends BaseController
         $servicio = $this->servicio->where('id', $data->service)->first();
 
         $session = session();
-        $idUsuario = $session->get('idUsuario');
+        $idusuario = $session->get('idusuario');
         // Preparar datos para la inserción
         $appointment = [
             'nombre' => $client['nombre'],
@@ -38,7 +38,7 @@ class CalendarioController extends BaseController
             'pago_empleado' => $servicio['pago_empleado'],
             'date' => $data->date,
             'time' => $data->time,
-            'idUsuario' => $idUsuario,
+            'idusuario' => $idusuario,
         ];
        
         if( $this->eventsModel->insert($appointment)){  

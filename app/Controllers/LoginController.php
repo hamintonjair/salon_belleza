@@ -38,7 +38,7 @@ class LoginController extends BaseController
         } else {
             if (hash('sha256', $clave) === $data['clave']) {
                 $dato = [
-                    'idUsuario' => $data['id'],
+                    'idusuario' => $data['id'],
                     'name' => $data['nombre'] . ' ' . $data['apellidos'], // Concatenar nombre y apellidos
                     'rol' => $data['rol'],
                     'email' => $data['correo'],

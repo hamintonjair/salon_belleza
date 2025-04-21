@@ -32,7 +32,7 @@ class VentasController extends BaseController
     public function ventas()
     {
         $session = session();
-        $userId = $session->get('idUsuario'); // Obtener el ID del usuario desde la sesión
+        $userId = $session->get('idusuario'); // Obtener el ID del usuario desde la sesión
 
         // Obtener permisos del usuario
         $permissions = $this->permisos->where('id_usuarios', $userId)->findAll();
@@ -52,7 +52,7 @@ class VentasController extends BaseController
     {
 
         $session = session();
-        $userId = $session->get('idUsuario'); // Obtener el ID del usuario desde la sesión
+        $userId = $session->get('idusuario'); // Obtener el ID del usuario desde la sesión
 
         // Obtener permisos del usuario
         $permissions = $this->permisos->where('id_usuarios', $userId)->findAll();
@@ -94,7 +94,7 @@ class VentasController extends BaseController
             }
             // Obtener datos
             $session     = session();
-            $usuarioId   = $session->get('idUsuario');
+            $usuarioId   = $session->get('idusuario');
             $clienteId   = $input['cliente'] ?? null;
             $productos   = is_array($input['productos']) ? $input['productos'] : [];
             $montoPagado = floatval($input['montoPagado'] ?? 0);

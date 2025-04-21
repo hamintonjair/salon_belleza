@@ -14,7 +14,7 @@ class TurnoServiciosModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['turno_id', 'nombre_servicio', 'precio_servicio','pago_empleado','trabajador_id','fecha_servicio','idUsuario','estado_pago'];
+    protected $allowedFields = ['turno_id', 'nombre_servicio', 'precio_servicio','pago_empleado','trabajador_id','fecha_servicio','idusuario','estado_pago'];
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
 

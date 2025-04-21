@@ -26,7 +26,7 @@ class PagosEmpleados extends BaseController
     {
         try {
             $session = session();
-            $userId = $session->get('idUsuario'); // Obtener el ID del usuario desde la sesión
+            $userId = $session->get('idusuario'); // Obtener el ID del usuario desde la sesión
             if (!$userId) {
                 echo "Error: Sesión caducada. Inicie sesión de nuevo.";
                 return;
@@ -302,7 +302,7 @@ class PagosEmpleados extends BaseController
     {
         try {
             $session = session();
-            $userId = $session->get('idUsuario');
+            $userId = $session->get('idusuario');
             $fechaHoy = date('Y-m-d');
 
             $empleado = $this->empleadoModel->find($empleadoId);
@@ -426,7 +426,7 @@ class PagosEmpleados extends BaseController
                 'cedula' => $empleado['cedula'],
                 'pago' => floatval($pagoNeto),
                 'fecha_pago' => $fechaHoy,
-                'idUsuario' => $userId
+                'idusuario' => $userId
             ]);
 
             // Registrar el egreso asociado (por el neto pagado)

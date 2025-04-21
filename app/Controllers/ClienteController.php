@@ -16,7 +16,7 @@ class ClienteController extends BaseController
     public function Client()
     {
         $session = session();
-        $userId = $session->get('idUsuario'); // Obtener el ID del usuario desde la sesión
+        $userId = $session->get('idusuario'); // Obtener el ID del usuario desde la sesión
 
         // Obtener permisos del usuario
         $permissions = $this->permisos->where('id_usuarios', $userId)->findAll();

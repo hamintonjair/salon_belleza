@@ -32,7 +32,7 @@ class VentaModel extends Model
             ->select('usuarios.nombre AS nombre_usuario, usuarios.apellidos AS apellidos, turno_servicios.nombre_servicio AS producto_nombre,
              "N/A" AS cantidad, (turno_servicios.precio_servicio - turno_servicios.pago_empleado) AS valor_total,
               turno_servicios.fecha_servicio AS fecha_venta')
-            ->join('usuarios', 'usuarios.id = turno_servicios.idUsuario')
+            ->join('usuarios', 'usuarios.id = turno_servicios.idusuario')
             ->join('pagos_empleados', 'pagos_empleados.empleado_id = turno_servicios.trabajador_id', 'left')
             ->orderBy('turno_servicios.fecha_servicio', 'DESC')
             ->get()
@@ -42,7 +42,7 @@ class VentaModel extends Model
         $productosTurnos = $this->db->table('turno_productos')
             ->select('usuarios.nombre AS nombre_usuario, usuarios.apellidos AS apellidos, turno_productos.nombre_producto AS producto_nombre, 
             turno_productos.cantidad, turno_productos.subtotal AS valor_total, turno_productos.fecha_venta')
-            ->join('usuarios', 'usuarios.id = turno_productos.idUsuario')
+            ->join('usuarios', 'usuarios.id = turno_productos.idusuario')
             ->join('agenda', 'agenda.id = turno_productos.turno_id')
             ->orderBy('turno_productos.fecha_venta', 'DESC')
             ->get()
@@ -52,7 +52,7 @@ class VentaModel extends Model
         $serviciosAgenda = $this->db->table('agenda')
             ->select('usuarios.nombre AS nombre_usuario, usuarios.apellidos AS apellidos, agenda.servicio AS producto_nombre,
              "N/A" AS cantidad, (agenda.precio - agenda.pago_empleado) AS valor_total, agenda.date AS fecha_venta')
-            ->join('usuarios', 'usuarios.id = agenda.idUsuario')
+            ->join('usuarios', 'usuarios.id = agenda.idusuario')
             ->where('agenda.estado', 'Finalizado')
             ->orderBy('agenda.date', 'DESC')
             ->get()

@@ -40,7 +40,7 @@ CREATE TABLE `agenda` (
   `time` time NOT NULL,
   `estado` varchar(20) NOT NULL DEFAULT 'Pendiente',
   `trabajador_id` int(11) DEFAULT NULL,
-  `idUsuario` int(11) NOT NULL,
+  `idusuario` int(11) NOT NULL,
   `estado_pago` varchar(20) DEFAULT 'pendiente'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -48,7 +48,7 @@ CREATE TABLE `agenda` (
 -- Volcado de datos para la tabla `agenda`
 --
 
-INSERT INTO `agenda` (`id`, `nombre`, `apellidos`, `cedula`, `telefono`, `servicio`, `precio`, `pago_empleado`, `date`, `time`, `estado`, `trabajador_id`, `idUsuario`, `estado_pago`) VALUES
+INSERT INTO `agenda` (`id`, `nombre`, `apellidos`, `cedula`, `telefono`, `servicio`, `precio`, `pago_empleado`, `date`, `time`, `estado`, `trabajador_id`, `idusuario`, `estado_pago`) VALUES
 (1, 'GENERICO', 'GENERICO', 999999999, 5555555, 'Cepillado', 25000.00, 10000.00, '2025-04-17', '18:51:00', 'Finalizado', 2, 1, 'pagado'),
 (2, 'GENERICO', 'GENERICO', 999999999, 5555555, 'Peinado en trenzas', 35000.00, 13000.00, '2025-04-18', '14:33:00', 'Finalizado', 3, 1, 'pagado'),
 (3, 'GENERICO', 'GENERICO', 999999999, 5555555, 'Pestañas', 12000.00, 4000.00, '2025-04-18', '18:36:00', 'Anulado', NULL, 1, 'pendiente'),
@@ -294,14 +294,14 @@ CREATE TABLE `pagos_empleados` (
   `pago` decimal(10,2) NOT NULL,
   `fecha_pago` date NOT NULL,
   `estado` varchar(20) NOT NULL DEFAULT 'pagado',
-  `idUsuario` int(11) NOT NULL
+  `idusuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `pagos_empleados`
 --
 
-INSERT INTO `pagos_empleados` (`id`, `empleado_id`, `nombre`, `apellidos`, `cedula`, `pago`, `fecha_pago`, `estado`, `idUsuario`) VALUES
+INSERT INTO `pagos_empleados` (`id`, `empleado_id`, `nombre`, `apellidos`, `cedula`, `pago`, `fecha_pago`, `estado`, `idusuario`) VALUES
 (5, 3, 'Carmensa', 'Perea', '13424', 28000.00, '2025-04-18', 'pagado', 1),
 (27, 2, 'Leidy', 'Asprilla', '12', 19000.00, '2025-04-18', 'pagado', 1),
 (28, 1, 'Sandra Paola', 'Córdoba Mena', '22222', 3000.00, '2025-04-18', 'pagado', 1);
@@ -403,7 +403,7 @@ CREATE TABLE `turno_productos` (
   `cantidad` int(11) NOT NULL,
   `precio_unitario` decimal(10,2) NOT NULL,
   `subtotal` decimal(10,2) NOT NULL,
-  `idUsuario` int(11) NOT NULL,
+  `idusuario` int(11) NOT NULL,
   `fecha_venta` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -411,7 +411,7 @@ CREATE TABLE `turno_productos` (
 -- Volcado de datos para la tabla `turno_productos`
 --
 
-INSERT INTO `turno_productos` (`id`, `turno_id`, `nombre_producto`, `cantidad`, `precio_unitario`, `subtotal`, `idUsuario`, `fecha_venta`) VALUES
+INSERT INTO `turno_productos` (`id`, `turno_id`, `nombre_producto`, `cantidad`, `precio_unitario`, `subtotal`, `idusuario`, `fecha_venta`) VALUES
 (1, 1, 'cerveza', 1, 3000.00, 3000.00, 1, '2025-04-17 23:53:03'),
 (2, 2, 'cerveza', 1, 3000.00, 3000.00, 1, '2025-04-18 19:35:34'),
 (3, 4, 'Gaseosa personal', 1, 2500.00, 2500.00, 1, '2025-04-18 23:37:44'),
@@ -432,7 +432,7 @@ CREATE TABLE `turno_servicios` (
   `pago_empleado` double(10,2) NOT NULL,
   `trabajador_id` int(11) DEFAULT NULL,
   `fecha_servicio` date DEFAULT NULL,
-  `idUsuario` int(11) NOT NULL,
+  `idusuario` int(11) NOT NULL,
   `estado_pago` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -440,7 +440,7 @@ CREATE TABLE `turno_servicios` (
 -- Volcado de datos para la tabla `turno_servicios`
 --
 
-INSERT INTO `turno_servicios` (`id`, `turno_id`, `nombre_servicio`, `precio_servicio`, `pago_empleado`, `trabajador_id`, `fecha_servicio`, `idUsuario`, `estado_pago`) VALUES
+INSERT INTO `turno_servicios` (`id`, `turno_id`, `nombre_servicio`, `precio_servicio`, `pago_empleado`, `trabajador_id`, `fecha_servicio`, `idusuario`, `estado_pago`) VALUES
 (1, 1, 'Alisado', 30000.00, 13000.00, 2, '2025-04-17', 1, 'pagado'),
 (2, 2, 'Uñas', 45000.00, 15000.00, 3, '2025-04-18', 1, 'pagado'),
 (3, 4, 'Peluquería', 8000.00, 3000.00, 1, '2025-04-18', 1, 'pagado');

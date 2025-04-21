@@ -25,7 +25,7 @@ class FinanzasController extends BaseController
     public function ingresos()
     {
         $session = session();
-        $userId = $session->get('idUsuario'); // Obtener el ID del usuario desde la sesión
+        $userId = $session->get('idusuario'); // Obtener el ID del usuario desde la sesión
 
         // Obtener permisos del usuario
         $permissions = $this->permisos->where('id_usuarios', $userId)->findAll();
@@ -114,7 +114,7 @@ class FinanzasController extends BaseController
     public function egresos()
     {
         $session = session();
-        $userId = $session->get('idUsuario'); // Obtener el ID del usuario desde la sesión
+        $userId = $session->get('idusuario'); // Obtener el ID del usuario desde la sesión
 
         // Obtener permisos del usuario
         $permissions = $this->permisos->where('id_usuarios', $userId)->findAll();

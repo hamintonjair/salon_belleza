@@ -16,7 +16,7 @@ class ServicioController extends BaseController
     public function services()
     {
         $session = session();
-        $userId = $session->get('idUsuario'); // Obtener el ID del servicio desde la sesión
+        $userId = $session->get('idusuario'); // Obtener el ID del servicio desde la sesión
 
         // Obtener permisos del servicio
         $permissions = $this->permisos->where('id_usuarios', $userId)->findAll();

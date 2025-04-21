@@ -13,7 +13,7 @@ class PagosEmpleadosModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['empleado_id', 'nombre', 'apellidos', 'cedula', 'pago', 'fecha_pago','estado','idUsuario','turno_id'];
+    protected $allowedFields = ['empleado_id', 'nombre', 'apellidos', 'cedula', 'pago', 'fecha_pago','estado','idusuario','turno_id'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

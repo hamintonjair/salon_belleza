@@ -19,7 +19,7 @@ class EmpresaController extends BaseController
     public function empresa()
     {
         $session = session();
-        $userId = $session->get('idUsuario');
+        $userId = $session->get('idusuario');
         // Obtener el ID del usuario desde la sesión
 
         // Obtener permisos del usuario

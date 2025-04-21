@@ -13,7 +13,7 @@ class AgendaModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['nombre', 'apellidos', 'cedula','telefono', 'servicio', 'precio', 'pago_empleado','date', 'time', 'estado','trabajador_id','idUsuario','estado_pago'];
+    protected $allowedFields = ['nombre', 'apellidos', 'cedula','telefono', 'servicio', 'precio', 'pago_empleado','date', 'time', 'estado','trabajador_id','idusuario','estado_pago'];
 
      // Obtener los turnos que han expirado (20 minutos atrás)
 

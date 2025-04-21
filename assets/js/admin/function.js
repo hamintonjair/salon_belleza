@@ -181,7 +181,7 @@ const tableUsuarios = new DataTable("#tableUsuarios", {
 
 function ModalUsuario() {
   document.querySelector("#frmUsuario").reset();
-  document.querySelector("#idUsuario").value = "";
+  document.querySelector("#idusuario").value = "";
   document.querySelector("#titleModal").innerHTML = "Nuevo Usuario";
   document.querySelector("#btnGuardarUsuario").innerHTML = "Guardar";
   $("#modelUsuario").modal("show");
@@ -193,9 +193,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let base_url = window.BASE_URL;
     let formData = new FormData(this);
-    let idUsuario = $("#idUsuario").val();
+    let idusuario = $("#idusuario").val();
     let url =
-      base_url + (idUsuario ? "usuarios/updateUsers" : "usuarios/setUsers");
+      base_url + (idusuario ? "usuarios/updateUsers" : "usuarios/setUsers");
 
     $.ajax({
       type: "POST",
@@ -247,7 +247,7 @@ function editarUsuario(id) {
     type: "GET",
     dataType: "json",
     success: function (resp) {
-      $("#idUsuario").val(resp.id);
+      $("#idusuario").val(resp.id);
       $("#nombre").val(resp.nombre);
       $("#apellidos").val(resp.apellidos);
       $("#cedula").val(resp.cedula);
@@ -333,7 +333,7 @@ function gestionarPermisos(id) {
     type: "GET",
     dataType: "json",
     success: function (resp) {
-      $("#idUsuario").val(resp.id);
+      $("#idusuario").val(resp.id);
       // Lógica adicional para mostrar los permisos del usuario en el modal
       // Aquí puedes agregar inputs o checkboxes para los permisos
 

@@ -16,7 +16,7 @@ class ProductoController extends BaseController
     public function products()
     {
         $session = session();
-        $userId = $session->get('idUsuario'); // Obtener el ID del producto desde la sesión
+        $userId = $session->get('idusuario'); // Obtener el ID del producto desde la sesión
 
         // Obtener permisos del producto
         $permissions = $this->permisos->where('id_usuarios', $userId)->findAll();

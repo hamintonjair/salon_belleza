@@ -13,7 +13,7 @@ class TurnoProductosModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['turno_id', 'nombre_producto', 'cantidad', 'precio_unitario', 'subtotal','idUsuario'];
+    protected $allowedFields = ['turno_id', 'nombre_producto', 'cantidad', 'precio_unitario', 'subtotal','idusuario'];
 
 
     protected bool $allowEmptyInserts = false;
