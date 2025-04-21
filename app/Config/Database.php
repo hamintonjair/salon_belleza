@@ -24,18 +24,18 @@ class Database extends Config
      *
      * @var array<string, mixed>
      */
-    public array $default;
+    public array $defaultt;
 
     public function __construct()
     {
         parent::__construct();
         $this->default = [
             'DSN'          => '',
-            'hostname'     => getenv('DB_HOST') ?: 'localhost',
-            'username'     => getenv('DB_USER') ?: 'root',
-            'password'     => getenv('DB_PASS') ?: '',
-            'database'     => getenv('DB_NAME') ?: 'db_span',
-            'DBDriver'     => getenv('DB_DRIVER') ?: 'MySQLi',
+            'hostname'     => 'localhost',
+            'username'     => 'root',
+            'password'     => '',
+            'database'     => 'db_span',
+            'DBDriver'     => 'MySQLi',
             'DBPrefix'     => '',
             'pConnect'     => false,
             'DBDebug'      => true,
@@ -46,9 +46,8 @@ class Database extends Config
             'compress'     => false,
             'strictOn'     => false,
             'failover'     => [],
-            'port'         => getenv('DB_PORT') ?: 3306,
+            'port'         => 3306,
             'numberNative' => false,
-            'sslmode'      => 'require',
             'dateFormat'   => [
                 'date'     => 'Y-m-d',
                 'datetime' => 'Y-m-d H:i:s',
@@ -84,34 +83,35 @@ class Database extends Config
     //        ],
     //    ];
 
-    //    /**
-    //     * Sample database connection for Postgre.
-    //     *
-    //     * @var array<string, mixed>
-    //     */
-    //    public array $default = [
-    //        'DSN'        => '',
-    //        'hostname'   => 'localhost',
-    //        'username'   => 'root',
-    //        'password'   => 'root',
-    //        'database'   => 'ci4',
-    //        'schema'     => 'public',
-    //        'DBDriver'   => 'Postgre',
-    //        'DBPrefix'   => '',
-    //        'pConnect'   => false,
-    //        'DBDebug'    => true,
-    //        'charset'    => 'utf8',
-    //        'swapPre'    => '',
-    //        'failover'   => [],
-    //        'port'       => 5432,
-    //        'dateFormat' => [
-    //            'date'     => 'Y-m-d',
-    //            'datetime' => 'Y-m-d H:i:s',
-    //            'time'     => 'H:i:s',
-    //        ],
-    //    ];
+       /**
+        * Sample database connection for Postgre.
+        *
+        * @var array<string, mixed>
+        */
+       public array $default = [
+           'DSN'        => '',
+           'hostname' => 'dpg-d01ushjuibrs73b74c0g-a.oregon-postgres.render.com',
+    'username' => 'salon_belleza_db_user',
+    'password' => 'oGrwxwt5v75gpPL00Df4PMRhTefOEvl',
+    'database' => 'salon_belleza_db',
+    'DBDriver' => 'Postgre',
+    'DBPrefix' => '',
+    'pConnect' => false,
+    'DBDebug'  => true,
+    'charset'  => 'utf8',
+    'DBCollat' => 'utf8_general_ci',
+    'swapPre'  => '',
+    'encrypt'  => true, // <--- ¡IMPORTANTE!
+    'port'     => 5432,
+    'sslmode'  => 'require',
+           'dateFormat' => [
+               'date'     => 'Y-m-d',
+               'datetime' => 'Y-m-d H:i:s',
+               'time'     => 'H:i:s',
+           ],
+       ];
 
-    //    /**
+       /**
     //     * Sample database connection for SQLSRV.
     //     *
     //     * @var array<string, mixed>
