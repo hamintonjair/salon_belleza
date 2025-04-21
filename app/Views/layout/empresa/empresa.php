@@ -46,7 +46,7 @@
 <script>
     // Obtener los datos de la empresa cuando se carga la página
     document.addEventListener('DOMContentLoaded', function() {
-        fetch('http://localhost/salon_belleza/empresa/getDatos')
+        fetch(window.BASE_URL + "empresa/getDatos")
             .then(response => response.json())
             .then(data => {
                 // Rellenar los campos con los datos obtenidos
@@ -75,7 +75,7 @@
         
         const formData = new FormData(this);
 
-        fetch('http://localhost/salon_belleza/empresa/actualizar', {
+        fetch(window.BASE_URL + "empresa/actualizar", {
             method: 'POST',
             body: formData
         })

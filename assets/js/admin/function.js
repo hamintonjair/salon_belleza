@@ -2,13 +2,13 @@
 
 // --- RESUMEN PREVIO DE PAGO Y PRÉSTAMOS ---
 $(document).on('click', '#btnResumenPago', function() {
-    var empleadoId = $('#empleado-id').val();
+    let empleadoId = $('#empleado-id').val();
     if (!empleadoId) {
         swal('Seleccione un empleado primero', '', 'warning');
         return;
     }
     $.ajax({
-        url: '/salon_belleza/pagos_empleados/getResumenPago/' + empleadoId,
+        url: window.BASE_URL + "pagos_empleados/getResumenPago/" + empleadoId,
         method: 'GET',
         dataType: 'json',
         success: function(response) {
@@ -46,13 +46,13 @@ $(document).on('click', '#btnResumenPago', function() {
 
 // --- PAGO DE EMPLEADO Y DESGLOSE DE PRÉSTAMOS ---
 $(document).on('click', '#btnPagar', function() {
-    var empleadoId = $('#empleado-id').val();
+    let empleadoId = $('#empleado-id').val();
     if (!empleadoId) {
         swal('Seleccione un empleado primero', '', 'warning');
         return;
     }
     $.ajax({
-        url: '/salon_belleza/pagos_empleados/pagarEmpleado/' + empleadoId,
+        url: window.BASE_URL + "pagos_empleados/pagarEmpleado/" + empleadoId,
         method: 'POST',
         dataType: 'json',
         success: function(response) {
@@ -94,13 +94,13 @@ $(document).on('click', '#btnPagar', function() {
 // --- HISTORIAL DE PRÉSTAMOS EN EGRESOS ---
 // --- VER PAGOS DE EMPLEADO ---
 $(document).on('click', '.btn-ver-pagos', function() {
-    var empleadoId = $(this).data('empleado');
+    let empleadoId = $(this).data('empleado');
     $.ajax({
-        url: '/salon_belleza/pagos_empleados/getPagosEmpleado/' + empleadoId,
+        url: window.BASE_URL + "pagos_empleados/getPagosEmpleado/" + empleadoId,
         method: 'GET',
         dataType: 'json',
         success: function(response) {
-            var tbody = $('#tbody-pagos');
+            let tbody = $('#tbody-pagos');
             tbody.empty();
             if (response.pagos && response.pagos.length > 0) {
                 response.pagos.forEach(function(pago) {
@@ -119,23 +119,23 @@ $(document).on('click', '.btn-ver-pagos', function() {
 
 // Delegación de eventos para asegurar funcionamiento en modales dinámicos
 $(document).on('click', '#btnVerPrestamos', function() {
-    var empleadoId = $('#empleado_id').val();
+    let empleadoId = $('#empleado_id').val();
     console.log("Empleado seleccionado:", empleadoId);
     if (!empleadoId) {
         swal('Seleccione un empleado primero', '', 'warning');
         return;
     }
     $.ajax({
-        url: '/salon_belleza/pagos_empleados/getPrestamosEmpleado/' + empleadoId,
+        url: window.BASE_URL + "pagos_empleados/getPrestamosEmpleado/" + empleadoId,
         method: 'GET',
         dataType: 'json',
         success: function(response) {
             console.log("Respuesta AJAX:", response);
-            var tbody = $('#tbody-prestamos-empleado');
+            let tbody = $('#tbody-prestamos-empleado');
             tbody.empty();
             if (response.prestamos && response.prestamos.length > 0) {
                 response.prestamos.forEach(function(prestamo) {
-                    var estadoBadge = prestamo.estado === 'saldado' ? '<span class="badge bg-success">Saldado</span>' : '<span class="badge bg-warning text-dark">Pendiente</span>';
+                    let estadoBadge = prestamo.estado === 'saldado' ? '<span class="badge bg-success">Saldado</span>' : '<span class="badge bg-warning text-dark">Pendiente</span>';
                     tbody.append('<tr>' +
                         '<td>$' + parseFloat(prestamo.monto).toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2}) + '</td>' +
                         '<td>' + estadoBadge + '</td>' +
@@ -145,7 +145,7 @@ $(document).on('click', '#btnVerPrestamos', function() {
             } else {
                 tbody.append('<tr><td colspan="3" class="text-center">Sin préstamos registrados</td></tr>');
             }
-            var modal = new bootstrap.Modal(document.getElementById('modalPrestamosEmpleado'));
+            let modal = new bootstrap.Modal(document.getElementById('modalPrestamosEmpleado'));
             modal.show();
         },
         error: function() {
@@ -160,7 +160,7 @@ const tableUsuarios = new DataTable("#tableUsuarios", {
     { className: "text-left", targets: [0, 1, 2, 3, 4, 5, 6] },
   ],
   ajax: {
-    url: "http://localhost/salon_belleza/" + "getUsers",
+    url: window.BASE_URL + "/getUsers",
     dataSrc: "",
   },
   columns: [
@@ -191,7 +191,7 @@ document.addEventListener("DOMContentLoaded", function () {
   $("#frmUsuario").on("submit", function (event) {
     event.preventDefault(); // Prevenir el envío del formulario por defecto
 
-    let base_url = "http://localhost/salon_belleza/";
+    let base_url = window.BASE_URL;
     let formData = new FormData(this);
     let idUsuario = $("#idUsuario").val();
     let url =
@@ -241,7 +241,7 @@ function editarUsuario(id) {
   document.querySelector("#titleModal").innerHTML = "Actualizar Usuario";
   document.querySelector("#frmUsuario").reset();
 
-  let base_url = "http://localhost/salon_belleza/";
+  let base_url = window.BASE_URL;
   $.ajax({
     url: base_url + "usuarios/getUser/" + id,
     type: "GET",
@@ -281,7 +281,7 @@ function eliminarUsuario($id) {
     dangerMode: true,
   }).then((willDelete) => {
     if (willDelete) {
-      let base_url = "http://localhost/salon_belleza/";
+      let base_url = window.BASE_URL;
       $.ajax({
         url: base_url + "usuarios/deleteUsers/" + $id,
         type: "POST",
@@ -327,7 +327,7 @@ function gestionarPermisos(id) {
   document.querySelector("#titleModal").innerHTML = "Gestionar Permisos";
   document.querySelector("#frmUsuarios").reset();
 
-  let base_url = "http://localhost/salon_belleza/";
+  let base_url = window.BASE_URL;
   $.ajax({
     url: base_url + "usuarios/obtenerUsuario/" + id,
     type: "GET",
@@ -350,7 +350,7 @@ function openModalPermisos(usuarioId) {
 }
 // mostrar los modulos
 function cargarModulos(usuarioId) {
-  let base_url = "http://localhost/salon_belleza/";
+  let base_url = window.BASE_URL;
 
   $.ajax({
     url: base_url + "usuarios/obtenerPermisos/" + usuarioId,
@@ -403,8 +403,8 @@ function cargarModulos(usuarioId) {
 // guardar los permisos asignados
 function guardarPermisos(event) {
   event.preventDefault();
-  var formData = new FormData(document.getElementById("frmPermisos"));
-  let base_url = "http://localhost/salon_belleza/";
+  let formData = new FormData(document.getElementById("frmPermisos"));
+  let base_url = window.BASE_URL;
 
   $.ajax({
     url: base_url + "usuarios/guardarPermisos",
@@ -442,7 +442,7 @@ const tableClientes = new DataTable("#tableClientes", {
     { className: "text-left", targets: [0, 1, 2, 3, 4] },
   ],
   ajax: {
-    url: "http://localhost/salon_belleza/" + "getClients",
+    url: window.BASE_URL + "getClients",
     dataSrc: "",
   },
   columns: [
@@ -471,7 +471,7 @@ document.addEventListener("DOMContentLoaded", function () {
   $("#frmCliente").on("submit", function (event) {
     event.preventDefault(); // Prevenir el envío del formulario por defecto
 
-    let base_url = "http://localhost/salon_belleza/";
+    let base_url = window.BASE_URL;
     let formData = new FormData(this);
     let idCliente = $("#idCliente").val();
     let url =
@@ -521,7 +521,7 @@ function editarCliente(id) {
   document.querySelector("#titleModal").innerHTML = "Actualizar Cliente";
   document.querySelector("#frmCliente").reset();
 
-  let base_url = "http://localhost/salon_belleza/";
+  let base_url = window.BASE_URL;
   $.ajax({
     url: base_url + "clientes/getClient/" + id,
     type: "GET",
@@ -575,7 +575,7 @@ function eliminarCliente($id) {
     dangerMode: true,
   }).then((willDelete) => {
     if (willDelete) {
-      let base_url = "http://localhost/salon_belleza/";
+      let base_url = window.BASE_URL;
       $.ajax({
         url: base_url + "clientes/deleteClient/" + $id,
         type: "POST",
@@ -618,7 +618,7 @@ const tableEmpleados = new DataTable("#tableEmpleados", {
     { className: "text-left", targets: [0, 1, 2, 3, 4] },
   ],
   ajax: {
-    url: "http://localhost/salon_belleza/" + "getEmpleados",
+    url: window.BASE_URL + "getEmpleados",
     dataSrc: "",
   },
   columns: [
@@ -647,7 +647,7 @@ document.addEventListener("DOMContentLoaded", function () {
   $("#frmEmpleado").on("submit", function (event) {
     event.preventDefault(); // Prevenir el envío del formulario por defecto
 
-    let base_url = "http://localhost/salon_belleza/";
+    let base_url = window.BASE_URL;
     let formData = new FormData(this);
     let idEmpleado = $("#idEmpleado").val();
     let url =
@@ -697,7 +697,7 @@ function editarEmpleado(id) {
   document.querySelector("#titleModal").innerHTML = "Actualizar Empleado";
   document.querySelector("#frmEmpleado").reset();
 
-  let base_url = "http://localhost/salon_belleza/";
+  let base_url = window.BASE_URL;
   $.ajax({
     url: base_url + "empleado/getEmpleado/" + id,
     type: "GET",
@@ -733,7 +733,7 @@ function eliminarEmpleado($id) {
     dangerMode: true,
   }).then((willDelete) => {
     if (willDelete) {
-      let base_url = "http://localhost/salon_belleza/";
+      let base_url = window.BASE_URL;
       $.ajax({
         url: base_url + "empleado/deleteEmpleado/" + $id,
         type: "POST",
@@ -775,7 +775,7 @@ const tableServicio = new DataTable("#tableServicio", {
     { className: "text-left", targets: [0, 1] },
   ],
   ajax: {
-    url: "http://localhost/salon_belleza/" + "getServices",
+    url: window.BASE_URL + "getServices",
     dataSrc: "",
   },
   columns: [
@@ -814,7 +814,7 @@ document.addEventListener("DOMContentLoaded", function () {
   $("#frmServicio").on("submit", function (event) {
     event.preventDefault(); // Prevenir el envío del formulario por defecto
 
-    let base_url = "http://localhost/salon_belleza/";
+    let base_url = window.BASE_URL;
     let formData = new FormData(this);
     let idServicio = $("#idServicio").val();
     let url =
@@ -865,7 +865,7 @@ function editarServicio(id) {
   document.querySelector("#titleModal").innerHTML = "Actualizar Servicio";
   document.querySelector("#frmServicio").reset();
 
-  let base_url = "http://localhost/salon_belleza/";
+  let base_url = window.BASE_URL;
   $.ajax({
     url: base_url + "services/getService/" + id,
     type: "GET",
@@ -897,7 +897,7 @@ function eliminarServicio($id) {
     dangerMode: true,
   }).then((willDelete) => {
     if (willDelete) {
-      let base_url = "http://localhost/salon_belleza/";
+      let base_url = window.BASE_URL;
       $.ajax({
         url: base_url + "services/deleteServices/" + $id,
         type: "POST",
@@ -939,7 +939,7 @@ const tableProducto = new DataTable("#tableProducto", {
     { className: "text-left", targets: [0, 1] },
   ],
   ajax: {
-    url: "http://localhost/salon_belleza/" + "getProducts",
+    url: window.BASE_URL + "getProducts",
     dataSrc: "",
   },
   columns: [
@@ -979,7 +979,7 @@ document.addEventListener("DOMContentLoaded", function () {
   $("#frmProducto").on("submit", function (event) {
     event.preventDefault(); // Prevenir el envío del formulario por defecto
 
-    let base_url = "http://localhost/salon_belleza/";
+    let base_url = window.BASE_URL;
     let formData = new FormData(this);
     let idProducto = $("#idProducto").val();
     let url =
@@ -1030,7 +1030,7 @@ function editarProducto(id) {
   document.querySelector("#titleModal").innerHTML = "Actualizar Producto";
   document.querySelector("#frmProducto").reset();
 
-  let base_url = "http://localhost/salon_belleza/";
+  let base_url = window.BASE_URL;
   $.ajax({
     url: base_url + "products/getProduct/" + id,
     type: "GET",
@@ -1081,7 +1081,7 @@ function eliminarProducto($id) {
     dangerMode: true,
   }).then((willDelete) => {
     if (willDelete) {
-      let base_url = "http://localhost/salon_belleza/";
+      let base_url = window.BASE_URL;
       $.ajax({
         url: base_url + "products/deleteProducts/" + $id,
         type: "POST",
@@ -1123,7 +1123,7 @@ const tableAgenda = new DataTable("#tableAgenda", {
     { className: "text-left", targets: [0, 1, 2, 3, 4, 5, 6, 7] },
   ],
   ajax: {
-    url: "http://localhost/salon_belleza/" + "getTurnos",
+    url: window.BASE_URL + "getTurnos",
     dataSrc: "",
   },
   columns: [
@@ -1152,7 +1152,7 @@ const tableAgenda = new DataTable("#tableAgenda", {
 });
 
 // actualizar turnos vencidosfunction removeExpiredTurnos() {
-fetch("http://localhost/salon_belleza/turno/removeExpiredTurnos")
+fetch(window.BASE_URL + "turno/removeExpiredTurnos")
   .then((response) => response.json())
   .then((data) => {
     if (data.success) {
@@ -1171,7 +1171,7 @@ fetch("http://localhost/salon_belleza/turno/removeExpiredTurnos")
 // finalizar turnos
 function atenderTurno(id) {
   $.ajax({
-    url: `http://localhost/salon_belleza/turno/atenderTurno/${id}`,
+    url: window.BASE_URL + "turno/atenderTurno/" + id,
     type: "POST",
     dataType: "json",
     success: function (response) {
@@ -1206,7 +1206,7 @@ function atenderTurno(id) {
 // finalizar turno
 function finalizarTurno(id) {
   $.ajax({
-    url: `http://localhost/salon_belleza/turno/finalizarTurno/${id}`,
+    url: window.BASE_URL + "turno/finalizarTurno/" + id,
     type: "POST",
     dataType: "json",
     success: function (response) {
@@ -1239,9 +1239,9 @@ function finalizarTurno(id) {
   });
 }
 // anular tuenos
-function inactivarTurno(id) {
+function inactiletTurno(id) {
   $.ajax({
-    url: `http://localhost/salon_belleza/turno/anularTurno/${id}`,
+    url: window.BASE_URL + "turno/anularTurno/" + id,
     type: "POST",
     dataType: "json",
     success: function (response) {
@@ -1281,7 +1281,7 @@ new DataTable("#tableTurnos", {
     { className: "text-left", targets: [0, 1, 2, 3, 4, 5, 6, 7] },
   ],
   ajax: {
-    url: "http://localhost/salon_belleza/" + "getTurnos/finalizados",
+    url: window.BASE_URL + "getTurnos/finalizados",
     dataSrc: "",
   },
   columns: [
@@ -1312,13 +1312,13 @@ new DataTable("#tableTurnos", {
 // generar factura
 function generarPdf(id) {
   window.location.href =
-    "http://localhost/salon_belleza/turno-controller/generatePdf/" + id;
+    window.BASE_URL + "turno-controller/generatePdf/" + id;
 }
 
 // mostrar los productor y servicios en el modal para añadir al cliente
 function mostrarModalAgregarServicio(turnoId) {
   $.ajax({
-    url: "http://localhost/salon_belleza/cargarDatosParaModal",
+    url: window.BASE_URL + "cargarDatosParaModal",
     method: "GET",
     dataType: "json",
     success: function (response) {
@@ -1367,7 +1367,7 @@ function guardarServicioOProducto() {
 
   // Realiza la petición AJAX
   $.ajax({
-    url: "http://localhost/salon_belleza/agregarServicioProducto", // Cambia esta URL por la ruta de tu controlador
+    url: window.BASE_URL + "agregarServicioProducto", // Cambia esta URL por la ruta de tu controlador
     method: "POST",
     data: data,
     dataType: "json",
@@ -1409,7 +1409,7 @@ $("#formAgregarServicioProducto").submit(function (event) {
   let formData = $(this).serialize();
 
   $.ajax({
-    url: "http://localhost/salon_belleza/agregarServicioProducto",
+    url: window.BASE_URL + "agregarServicioProducto",
     method: "POST",
     data: formData,
     success: function (response) {
@@ -1446,7 +1446,7 @@ $("#formAgregarServicioProducto").submit(function (event) {
 // Mostrar modal para asignar trabajador
 function mostrarModalAsignarTrabajador(turnoId) {
   $.ajax({
-      url: "http://localhost/salon_belleza/turno/getTrabajadores", // Cambia esta URL si es necesario
+      url: window.BASE_URL + "turno/getTrabajadores", // Cambia esta URL si es necesario
       method: "GET",
       dataType: "json",
       success: function(response) {
@@ -1485,7 +1485,7 @@ if (formAsignar) {
     //     console.log(`${key}: ${value}`);
     // }
 
-    fetch('http://localhost/salon_belleza/turno/asignarTrabajador', {
+    fetch(window.BASE_URL + "turno/asignarTrabajador", {
         method: 'POST',
         body: formData
     })
@@ -1529,7 +1529,7 @@ if (document.querySelector("#tableIngresos")) {
             { className: "text-left", targets: [0, 1, 4] }
         ],
         ajax: {
-            url: "http://localhost/salon_belleza/finanzas/getIngresos",
+            url: window.BASE_URL + "finanzas/getIngresos",
             dataSrc: "",
             data: function(d) {
                 d.month = document.getElementById("monthFilter").value;
@@ -1561,7 +1561,7 @@ if (document.querySelector("#tableIngresos")) {
         console.error("ERROR DT Ingresos:", message);
     });
     tableIngresos.on('xhr', function(e, settings, json) {
-        var total = json.reduce(function(a, b) {
+        let total = json.reduce(function(a, b) {
             return a + parseFloat(b.valor_total);
         }, 0);
         document.getElementById("totalIngresos").innerText =
@@ -1569,7 +1569,7 @@ if (document.querySelector("#tableIngresos")) {
     });
     // Filtros y gráfico de Ingresos
     function loadChart(year) {
-        let url = "http://localhost/salon_belleza/finanzas/getIngresosMensual";
+        let url = window.BASE_URL + "/salon_belleza/finanzas/getIngresosMensual";
         if (year) url += "?year=" + year;
         fetch(url)
             .then(res => res.json())
@@ -1606,7 +1606,7 @@ if (document.querySelector("#tableIngresos")) {
 
 // Función para graficar egresos mensuales
 function loadChartEgresos(year, month) {
-    let url = "http://localhost/salon_belleza/finanzas/getEgresosMensual";
+    let url = window.BASE_URL + "/salon_belleza/finanzas/getEgresosMensual";
     const params = [];
     if (year) params.push("year=" + year);
     if (month) params.push("month=" + month);
@@ -1649,7 +1649,7 @@ if (document.querySelector("#tableEgresos")) {
             { className: "text-left", targets: [0, 1] }
         ],
         ajax: {
-            url: "http://localhost/salon_belleza/finanzas/getEgresos",
+            url: window.BASE_URL + "/salon_belleza/finanzas/getEgresos",
             dataSrc: "",
             data: function(d) {
                 d.month = document.getElementById("monthFilterEgresos").value;
@@ -1672,7 +1672,7 @@ if (document.querySelector("#tableEgresos")) {
     tableEgresos.on('xhr', function(e,settings,json){ /* suma total */ });
     // Función para obtener y mostrar saldo disponible
     function loadSaldoEgresos(year, month) {
-        let url = "http://localhost/salon_belleza/finanzas/getSaldo";
+        let url = window.BASE_URL + "/salon_belleza/finanzas/getSaldo";
         const params = [];
         if (year) params.push("year=" + year);
         if (month) params.push("month=" + month);
@@ -1717,7 +1717,7 @@ if (document.querySelector("#tableEgresos")) {
         document.getElementById("formRetirarEgreso").addEventListener("submit", function(e) {
         e.preventDefault();
         const formData = new FormData(this);
-        fetch("http://localhost/salon_belleza/finanzas/retirar", { method:"POST", body: formData })
+        fetch(window.BASE_URL + "finanzas/retirar", { method:"POST", body: formData })
           .then(res => res.json())
           .then(json => {
               const mon = document.getElementById("monthFilterEgresos").value;

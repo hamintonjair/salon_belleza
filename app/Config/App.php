@@ -16,7 +16,13 @@ class App extends BaseConfig
      *
      * E.g., http://example.com/
      */
-    public string $baseURL = 'http://localhost/salon_belleza/';
+    public string $baseURL = '';
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->baseURL = getenv('app.baseURL') ?: 'http://localhost/salon_belleza/';
+    }
 
     public $timezone = 'America/Bogota';
 

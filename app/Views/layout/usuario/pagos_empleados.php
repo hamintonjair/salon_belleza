@@ -185,7 +185,7 @@
                 }, 200);
 
                 $.ajax({
-                    url: 'http://localhost/salon_belleza/pagos_empleados/getServiciosRealizados/' + empleadoId,
+                    url: window.BASE_URL + "pagos_empleados/getServiciosRealizados/" + empleadoId,
                     method: 'GET',
                     dataType: 'json',
                     success: function(response) {
@@ -246,7 +246,7 @@
                 // Inicializar el DataTable con la URL específica para obtener los pagos del empleado
                 let pagosTable = new DataTable("#tablePagosEmpleado", {
                     ajax: {
-                        url: 'http://localhost/salon_belleza/pagos_empleados/getPagosEmpleado/' + empleadoId,
+                        url: window.BASE_URL + "pagos_empleados/getPagosEmpleado/" + empleadoId,
                         dataSrc: 'pagos' // Asumiendo que la respuesta tiene un objeto `pagos`
                     },
                     columns: [{
@@ -286,7 +286,7 @@
 
                 let pagoempleado = new DataTable("#tablePagos", {
                     ajax: {
-                        url: 'http://localhost/salon_belleza/pagos_empleados/getEmpleados',
+                        url: window.BASE_URL + "pagos_empleados/getEmpleados",
                         dataSrc: 'empleados'
                     },
                     columns: [{

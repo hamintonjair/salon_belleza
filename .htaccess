@@ -1,3 +1,16 @@
+# Exponer variables de entorno a PHP para Render
+PassEnv CI_ENVIRONMENT
+PassEnv app.baseURL
+PassEnv database.default.DBDriver
+PassEnv database.default.hostname
+PassEnv database.default.port
+PassEnv database.default.database
+PassEnv database.default.username
+PassEnv database.default.password
+PassEnv GOOGLE_CLIENT_ID
+PassEnv GOOGLE_CLIENT_SECRET
+PassEnv GOOGLE_REDIRECT_URI
+
 # Disable directory browsing
 Options -Indexes
 

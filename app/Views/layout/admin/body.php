@@ -71,7 +71,7 @@
                 editable: true,
                 selectable: true,
                 events: function(fetchInfo, successCallback, failureCallback) {
-                  fetch('http://localhost/salon_belleza/calendario/getBookings')
+                  fetch(window.BASE_URL + "calendario/getBookings")
                     .then(response => response.json())
                     .then(data => {
                       let events = data.map(booking => ({
@@ -173,7 +173,7 @@
               // Buscar cliente por cédula
               document.getElementById('searchButton').addEventListener('click', function() {
                 const idNumber = document.getElementById('idNumber').value;
-                let base_url = "http://localhost/salon_belleza/";
+                let base_url = window.BASE_URL;
                 $.ajax({
                   url: base_url + "cliente/getClientById/" + idNumber,
                   type: "GET",
@@ -222,7 +222,7 @@
                 const service = document.getElementById('service').value;
                 const date = document.getElementById('selectedDate').value;
                 const time = document.getElementById('bookingTime').value;
-                fetch('http://localhost/salon_belleza/booking/save', {
+                fetch(window.BASE_URL + "booking/save", {
                     method: 'POST',
                     headers: {
                       'Content-Type': 'application/json'

@@ -543,7 +543,7 @@ class TurnoController extends BaseController
             // Formatear estado y acción
             if ($turno['estado'] == 'Finalizado') {
                 $turno['estado'] = '<span class="badge badge-success">Finalizado</span>';
-                $turno['accion'] = '<a class="btn btn-danger btn-sm" href="http://localhost/salon_belleza/turno/generatePdf/' . $turno['id'] . '" target="_blank"><i class="fas fa-file-pdf"></i></a>';
+                $turno['accion'] = '<a class="btn btn-danger btn-sm" href="' . base_url('turno/generatePdf/' . $turno['id']) . '" target="_blank"><i class="fas fa-file-pdf"></i></a>';
             } elseif ($turno['estado'] == 'Anulado') {
                 $turno['estado'] = '<span class="badge badge-warning">Anulado</span>';
                 $turno['accion'] = '<button class="btn btn-warning btn-sm inactivar" onclick="inactivarTurno(' . $turno['id'] . ')" disabled><i class="fas fa-ban"></i></button>';

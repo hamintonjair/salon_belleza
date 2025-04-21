@@ -27,6 +27,7 @@
 </head>
 
 <body>
+    <script>var BASE_URL = "<?= base_url() ?>";</script>
   <div class="container-scroller d-flex">
     <!-- partial:./partials/_sidebar.html -->
     <nav class="sidebar sidebar-offcanvas" id="sidebar">

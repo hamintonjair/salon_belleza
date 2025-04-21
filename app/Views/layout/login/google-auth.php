@@ -30,7 +30,7 @@ if (isset($_GET['code'])) {
     ];
     $session->set($dato);
     // Redirigir al usuario a la página de inicio
-    header('Location: http://localhost/salon_belleza/dashboard');
+    header('Location: ' . base_url('dashboard'));
     exit;
 }
 

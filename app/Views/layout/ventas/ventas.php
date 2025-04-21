@@ -84,7 +84,7 @@
 
             function cargarProductos() {
                 $.ajax({
-                    url: 'http://localhost/salon_belleza/ventas/productos',
+                    url: window.BASE_URL + "ventas/productos",
                     method: 'GET',
                     dataType: 'json',
                     success: function(response) {
@@ -109,7 +109,7 @@
 
             function cargarClientes() {
                 $.ajax({
-                    url: 'http://localhost/salon_belleza/ventas/clientes',
+                    url: window.BASE_URL + "ventas/clientes",
                     method: 'GET',
                     dataType: 'json',
                     success: function(response) {
@@ -257,7 +257,7 @@
 
                 // Aquí enviar la venta al servidor
                 $.ajax({
-                    url: 'http://localhost/salon_belleza/ventas/confirmar',
+                    url: window.BASE_URL + "ventas/confirmar",
                     method: 'POST',
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',

@@ -39,7 +39,7 @@
             document.addEventListener("DOMContentLoaded", function() {
                 const tableVentas = new DataTable("#tableVentas", {
                     ajax: {
-                        url: 'http://localhost/salon_belleza/ventas/getVentas',
+                        url: window.BASE_URL + "ventas/getVentas",
                         dataSrc: 'ventas'
                     },
                     columns: [{
@@ -83,7 +83,7 @@
                         {
                             data: null,
                             render: function(data, type, row) {
-                                let baseUrl = 'http://localhost/salon_belleza/';
+                                let baseUrl = window.BASE_URL ;
                                 let actions = '';
 
                                 // Verificar el rol
@@ -131,7 +131,7 @@
                     }).then((willDelete) => {
                         if (willDelete) {
                             $.ajax({
-                                url: `http://localhost/salon_belleza/ventas/anular/${id}`,
+                                url: `${window.BASE_URL}ventas/anular/${id}`,
                                 type: "GET",
                                 dataType: "json",
                                 success: function(response) {
