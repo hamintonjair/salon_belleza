@@ -92,7 +92,7 @@ class Database extends Config
            'DSN'        => '',
            'hostname' => 'dpg-d01ushjuibrs73b74c0g-a.oregon-postgres.render.com',
     'username' => 'salon_belleza_db_user',
-    'password' => 'oGrwxwt5v75gpPL00Df4PMRhTefOEvl',
+    'password' => 'oGrwxwt5v75gbPLODOfD4PMRhTefOEvl',
     'database' => 'salon_belleza_db',
     'DBDriver' => 'Postgre',
     'DBPrefix' => '',
