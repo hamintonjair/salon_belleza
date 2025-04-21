@@ -85,7 +85,7 @@ $session = session();
     <!-- Google Sign-In SDK -->
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <!-- Custom JS -->
-    <script src="<?php echo base_url(); ?>assets/js/auth.js"></script>
+    <!-- <script src="<?php echo base_url(); ?>assets/js/auth.js"></script> -->
 </body>
 <style>
     .footer-bg-image {
