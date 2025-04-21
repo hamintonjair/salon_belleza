@@ -48,6 +48,7 @@ class Database extends Config
             'failover'     => [],
             'port'         => getenv('DB_PORT') ?: 3306,
             'numberNative' => false,
+            'sslmode'      => 'require',
             'dateFormat'   => [
                 'date'     => 'Y-m-d',
                 'datetime' => 'Y-m-d H:i:s',
