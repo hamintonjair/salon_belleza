@@ -1569,7 +1569,7 @@ if (document.querySelector("#tableIngresos")) {
     });
     // Filtros y gráfico de Ingresos
     function loadChart(year) {
-        let url = window.BASE_URL + "/salon_belleza/finanzas/getIngresosMensual";
+        let url = window.BASE_URL + "finanzas/getIngresosMensual";
         if (year) url += "?year=" + year;
         fetch(url)
             .then(res => res.json())
@@ -1606,7 +1606,7 @@ if (document.querySelector("#tableIngresos")) {
 
 // Función para graficar egresos mensuales
 function loadChartEgresos(year, month) {
-    let url = window.BASE_URL + "/salon_belleza/finanzas/getEgresosMensual";
+    let url = window.BASE_URL + "finanzas/getEgresosMensual";
     const params = [];
     if (year) params.push("year=" + year);
     if (month) params.push("month=" + month);
@@ -1649,7 +1649,7 @@ if (document.querySelector("#tableEgresos")) {
             { className: "text-left", targets: [0, 1] }
         ],
         ajax: {
-            url: window.BASE_URL + "/salon_belleza/finanzas/getEgresos",
+            url: window.BASE_URL + "finanzas/getEgresos",
             dataSrc: "",
             data: function(d) {
                 d.month = document.getElementById("monthFilterEgresos").value;
@@ -1672,7 +1672,7 @@ if (document.querySelector("#tableEgresos")) {
     tableEgresos.on('xhr', function(e,settings,json){ /* suma total */ });
     // Función para obtener y mostrar saldo disponible
     function loadSaldoEgresos(year, month) {
-        let url = window.BASE_URL + "/salon_belleza/finanzas/getSaldo";
+        let url = window.BASE_URL + "finanzas/getSaldo";
         const params = [];
         if (year) params.push("year=" + year);
         if (month) params.push("month=" + month);

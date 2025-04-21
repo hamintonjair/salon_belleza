@@ -105,7 +105,7 @@
                                 return;
                             }
                             $.ajax({
-                                url: '/salon_belleza/pagos_empleados/getResumenPago/' + empleadoId,
+                                url: '<?= site_url('pagos_empleados/getResumenPago/' . $empleadoId) ?>',
                                 method: 'GET',
                                 dataType: 'json',
                                 success: function(response) {
@@ -350,7 +350,7 @@
                     }).then(function(confirmado) {
                         if (confirmado) {
                             $.ajax({
-                                url: '/salon_belleza/pagos_empleados/pagarEmpleado/' + empleadoId,
+                                url: '<?= site_url('pagos_empleados/pagarEmpleado/' . $empleadoId) ?>',
                                 method: 'POST',
                                 dataType: 'json',
                                 success: function(response) {
@@ -394,7 +394,7 @@
             // Función global para mostrar historial de préstamos desde botón
             window.verPrestamosEmpleado = function(empleadoId) {
                 $.ajax({
-                    url: '/salon_belleza/pagos_empleados/getPrestamosEmpleado/' + empleadoId,
+                    url: '<?= site_url('pagos_empleados/getPrestamosEmpleado/' . $empleadoId) ?>',
                     method: 'GET',
                     dataType: 'json',
                     success: function(response) {

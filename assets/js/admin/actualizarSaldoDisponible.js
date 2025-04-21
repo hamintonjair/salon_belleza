@@ -1,7 +1,7 @@
 // Script para actualizar el saldo disponible después de un pago o egreso
 function actualizarSaldoDisponible() {
     $.ajax({
-        url: '/salon_belleza/finanzas/getSaldo',
+        url: window.BASE_URL + 'finanzas/getSaldo',
         method: 'GET',
         dataType: 'json',
         success: function(resp) {
