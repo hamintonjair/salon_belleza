@@ -76,7 +76,7 @@
        
 
         <li class="nav-item sidebar-category">
-          <p>Agenda</p>
+          <p>Servicios</p>
           <span></span>
         </li>
         <li class="nav-item">
