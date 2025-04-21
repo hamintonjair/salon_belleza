@@ -12,7 +12,13 @@ $pass = getenv('database.default.password');
 $port = getenv('database.default.port') ?: 5432;
 
 $dsn = "pgsql:host=$host;port=$port;dbname=$db";
-
+echo "<pre>";
+echo "HOST: " . getenv('database.default.hostname') . "\n";
+echo "PORT: " . getenv('database.default.port') . "\n";
+echo "DB: " . getenv('database.default.database') . "\n";
+echo "USER: " . getenv('database.default.username') . "\n";
+echo "PASS: " . getenv('database.default.password') . "\n";
+echo "</pre>";
 try {
     $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
     $sql = file_get_contents($sqlFile);
