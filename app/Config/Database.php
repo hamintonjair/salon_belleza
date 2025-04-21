@@ -26,31 +26,31 @@ class Database extends Config
      */
     // public array $default;
 
-    public array $default = [
-        'DSN'          => '',
-        'hostname'     => 'localhost',
-        'username'     => 'root',
-        'password'     => '',
-        'database'     => 'db_span',
-        'DBDriver'     => 'MySQLi',
-        'DBPrefix'     => '',
-        'pConnect'     => false,
-        'DBDebug'      => true,
-        'charset'      => 'utf8mb4',
-        'DBCollat'     => 'utf8mb4_general_ci',
-        'swapPre'      => '',
-        'encrypt'      => false,
-        'compress'     => false,
-        'strictOn'     => false,
-        'failover'     => [],
-        'port'         => 3306,
-        'numberNative' => false,
-        'dateFormat'   => [
-            'date'     => 'Y-m-d',
-            'datetime' => 'Y-m-d H:i:s',
-            'time'     => 'H:i:s',
-        ],
-    ];
+    // public array $default = [
+    //     'DSN'          => '',
+    //     'hostname'     => 'localhost',
+    //     'username'     => 'root',
+    //     'password'     => '',
+    //     'database'     => 'db_span',
+    //     'DBDriver'     => 'MySQLi',
+    //     'DBPrefix'     => '',
+    //     'pConnect'     => false,
+    //     'DBDebug'      => true,
+    //     'charset'      => 'utf8mb4',
+    //     'DBCollat'     => 'utf8mb4_general_ci',
+    //     'swapPre'      => '',
+    //     'encrypt'      => false,
+    //     'compress'     => false,
+    //     'strictOn'     => false,
+    //     'failover'     => [],
+    //     'port'         => 3306,
+    //     'numberNative' => false,
+    //     'dateFormat'   => [
+    //         'date'     => 'Y-m-d',
+    //         'datetime' => 'Y-m-d H:i:s',
+    //         'time'     => 'H:i:s',
+    //     ],
+    // ];
 
 
     //    /**
@@ -79,28 +79,28 @@ class Database extends Config
     //  *
     //  * @var array<string, mixed>
     //  */
-    // public array $default = [
-    //     'DSN'        => '',
-    //     'hostname' => 'dpg-d01ushjuibrs73b74c0g-a.oregon-postgres.render.com',
-    //     'username' => 'salon_belleza_db_user',
-    //     'password' => 'oGrwxwt5v75gbPLODOfD4PMRhTefOEvl',
-    //     'database' => 'salon_belleza_db',
-    //     'DBDriver' => 'Postgre',
-    //     'DBPrefix' => '',
-    //     'pConnect' => false,
-    //     'DBDebug'  => true,
-    //     'charset'  => 'utf8',
-    //     'DBCollat' => 'utf8_general_ci',
-    //     'swapPre'  => '',
-    //     'encrypt'  => true, // <--- ¡IMPORTANTE!
-    //     'port'     => 5432,
-    //     'sslmode'  => 'require',
-    //     'dateFormat' => [
-    //         'date'     => 'Y-m-d',
-    //         'datetime' => 'Y-m-d H:i:s',
-    //         'time'     => 'H:i:s',
-    //     ],
-    // ];
+    public array $default = [
+        'DSN'        => '',
+        'hostname' => 'dpg-d01ushjuibrs73b74c0g-a.oregon-postgres.render.com',
+        'username' => 'salon_belleza_db_user',
+        'password' => 'oGrwxwt5v75gbPLODOfD4PMRhTefOEvl',
+        'database' => 'salon_belleza_db',
+        'DBDriver' => 'Postgre',
+        'DBPrefix' => '',
+        'pConnect' => false,
+        'DBDebug'  => true,
+        'charset'  => 'utf8',
+        'DBCollat' => 'utf8_general_ci',
+        'swapPre'  => '',
+        'encrypt'  => true, // <--- ¡IMPORTANTE!
+        'port'     => 5432,
+        'sslmode'  => 'require',
+        'dateFormat' => [
+            'date'     => 'Y-m-d',
+            'datetime' => 'Y-m-d H:i:s',
+            'time'     => 'H:i:s',
+        ],
+    ];
 
     /**
     //     * Sample database connection for SQLSRV.
