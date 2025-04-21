@@ -24,31 +24,43 @@ class Database extends Config
      *
      * @var array<string, mixed>
      */
-    public array $default = [
-        'DSN'          => '',
-        'hostname'     => getenv('DB_HOST') ?: 'localhost',
-        'username'     => getenv('DB_USER') ?: 'root',
-        'password'     => getenv('DB_PASS') ?: '',
-        'database'     => getenv('DB_NAME') ?: 'db_span',
-        'DBDriver'     => getenv('DB_DRIVER') ?: 'MySQLi',
-        'DBPrefix'     => '',
-        'pConnect'     => false,
-        'DBDebug'      => true,
-        'charset'      => 'utf8mb4',
-        'DBCollat'     => 'utf8mb4_general_ci',
-        'swapPre'      => '',
-        'encrypt'      => false,
-        'compress'     => false,
-        'strictOn'     => false,
-        'failover'     => [],
-        'port'         => getenv('DB_PORT') ?: 3306,
-        'numberNative' => false,
-        'dateFormat'   => [
-            'date'     => 'Y-m-d',
-            'datetime' => 'Y-m-d H:i:s',
-            'time'     => 'H:i:s',
-        ],
-    ];
+    public array $default;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->default = [
+            'DSN'          => '',
+            'hostname'     => getenv('DB_HOST') ?: 'localhost',
+            'username'     => getenv('DB_USER') ?: 'root',
+            'password'     => getenv('DB_PASS') ?: '',
+            'database'     => getenv('DB_NAME') ?: 'db_span',
+            'DBDriver'     => getenv('DB_DRIVER') ?: 'MySQLi',
+            'DBPrefix'     => '',
+            'pConnect'     => false,
+            'DBDebug'      => true,
+            'charset'      => 'utf8mb4',
+            'DBCollat'     => 'utf8mb4_general_ci',
+            'swapPre'      => '',
+            'encrypt'      => false,
+            'compress'     => false,
+            'strictOn'     => false,
+            'failover'     => [],
+            'port'         => getenv('DB_PORT') ?: 3306,
+            'numberNative' => false,
+            'dateFormat'   => [
+                'date'     => 'Y-m-d',
+                'datetime' => 'Y-m-d H:i:s',
+                'time'     => 'H:i:s',
+            ],
+        ];
+
+        // Lógica para entorno de pruebas
+        if (ENVIRONMENT === 'testing') {
+            $this->defaultGroup = 'tests';
+        }
+    }
+
 
     //    /**
     //     * Sample database connection for SQLite3.
@@ -187,15 +199,15 @@ class Database extends Config
         ],
     ];
 
-    public function __construct()
-    {
-        parent::__construct();
+    // public function __construct()
+    // {
+    //     parent::__construct();
 
-        // Ensure that we always set the database group to 'tests' if
-        // we are currently running an automated test suite, so that
-        // we don't overwrite live data on accident.
-        if (ENVIRONMENT === 'testing') {
-            $this->defaultGroup = 'tests';
-        }
-    }
+    //     // Ensure that we always set the database group to 'tests' if
+    //     // we are currently running an automated test suite, so that
+    //     // we don't overwrite live data on accident.
+    //     if (ENVIRONMENT === 'testing') {
+    //         $this->defaultGroup = 'tests';
+    //     }
+    // }
 }
