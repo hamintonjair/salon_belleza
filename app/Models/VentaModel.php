@@ -50,8 +50,8 @@ class VentaModel extends Model
 
         // Obtener los servicios de la agenda
         $serviciosAgenda = $this->db->table('agenda')
-            ->select('usuarios.nombre AS nombre_usuario, usuarios.apellidos AS apellidos, agenda.servicio AS producto_nombre,
-             "N/A" AS cantidad, (agenda.precio - agenda.pago_empleado) AS valor_total, agenda.date AS fecha_venta')
+            ->select("usuarios.nombre AS nombre_usuario, usuarios.apellidos AS apellidos, agenda.servicio AS producto_nombre,
+             'N/A' AS cantidad, (agenda.precio - agenda.pago_empleado) AS valor_total, agenda.date AS fecha_venta")
             ->join('usuarios', 'usuarios.id = agenda.idusuario')
             ->where('agenda.estado', 'Finalizado')
             ->orderBy('agenda.date', 'DESC')
