@@ -19,6 +19,13 @@ class LoginController extends BaseController
         if ($session->has('email')) {
             return redirect()->to(base_url('dashboard'));
         }
+        echo '<pre>';
+        var_dump(getenv('app.baseURL'));
+        var_dump(getenv('APP_BASEURL'));
+        var_dump($_SERVER);
+        var_dump($_ENV);
+        echo '</pre>';
+exit;
         return view('layout/login/login');
     }
     // validar
