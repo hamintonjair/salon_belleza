@@ -29,9 +29,9 @@ class VentaModel extends Model
 
         // Obtener los servicios realizados
         $servicios = $this->db->table('turno_servicios')
-            ->select('usuarios.nombre AS nombre_usuario, usuarios.apellidos AS apellidos, turno_servicios.nombre_servicio AS producto_nombre,
-             "N/A" AS cantidad, (turno_servicios.precio_servicio - turno_servicios.pago_empleado) AS valor_total,
-              turno_servicios.fecha_servicio AS fecha_venta')
+            ->select("usuarios.nombre AS nombre_usuario, usuarios.apellidos AS apellidos, turno_servicios.nombre_servicio AS producto_nombre,
+             'N/A' AS cantidad, (turno_servicios.precio_servicio - turno_servicios.pago_empleado) AS valor_total,
+             turno_servicios.fecha_servicio AS fecha_venta")
             ->join('usuarios', 'usuarios.id = turno_servicios.idusuario')
             ->join('pagos_empleados', 'pagos_empleados.empleado_id = turno_servicios.trabajador_id', 'left')
             ->orderBy('turno_servicios.fecha_servicio', 'DESC')
