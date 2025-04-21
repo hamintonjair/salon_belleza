@@ -27,7 +27,11 @@
 </head>
 
 <body>
+  
     <script>var BASE_URL = "<?= base_url() ?>";</script>
+    <script>
+    console.log("BASE_URL desde PHP:", BASE_URL);
+</script>
   <div class="container-scroller d-flex">
     <!-- partial:./partials/_sidebar.html -->
     <nav class="sidebar sidebar-offcanvas" id="sidebar">
