@@ -21,12 +21,12 @@ class App extends BaseConfig
     public function __construct()
     {
         parent::__construct();
-        $baseURL = getenv('app.baseURL');
-        if (!$baseURL && isset($_SERVER['app.baseURL'])) {
-            $baseURL = $_SERVER['app.baseURL'];
+        $baseURL = getenv('APP_BASEURL');
+        if (!$baseURL && isset($_SERVER['APP_BASEURL'])) {
+            $baseURL = $_SERVER['APP_BASEURL'];
         }
-        if (!$baseURL && isset($_ENV['app.baseURL'])) {
-            $baseURL = $_ENV['app.baseURL'];
+        if (!$baseURL && isset($_ENV['APP_BASEURL'])) {
+            $baseURL = $_ENV['APP_BASEURL'];
         }
         $this->baseURL = $baseURL ?: 'http://localhost/salon_belleza/';
     }
